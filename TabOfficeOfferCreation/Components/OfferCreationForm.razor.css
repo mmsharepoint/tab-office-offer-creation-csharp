@@ -39,3 +39,12 @@
 .error {
     color: red;
 }
+
+.form {
+  max-width: 480px;
+  padding: 8px;
+}
+
+.formLine {
+  margin-top: 12px;
+}
