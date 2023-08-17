@@ -1,6 +1,8 @@
 using TabOfficeOfferCreation;
 using TabOfficeOfferCreation.Interop.TeamsSDK;
 using Microsoft.Identity.Web;
+using PnP.Core.Auth.Services.Builder.Configuration;
+using PnP.Core.Services.Builder.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +16,12 @@ builder.Services
     // Use in-memory token cache
     // See https://github.com/AzureAD/microsoft-identity-web/wiki/token-cache-serialization
     .AddInMemoryTokenCaches();
+
+// Add the PnP Core SDK library
+builder.Services.AddPnPCore();
+builder.Services.Configure<PnPCoreOptions>(builder.Configuration.GetSection("PnPCore"));
+builder.Services.AddPnPCoreAuthentication();
+builder.Services.Configure<PnPCoreAuthenticationOptions>(builder.Configuration.GetSection("PnPCore"));
 
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
