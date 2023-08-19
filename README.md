@@ -22,7 +22,7 @@ App live in action inside Teams
 
 * [Office 365 tenant](https://dev.office.com/sharepoint/docs/spfx/set-up-your-development-environment)
 * [Visual Studio 2022](https://visualstudio.microsoft.com/vs/community/)
-* [Teams Toolkit for Visual Studio](https://learn.microsoft.com/microsoftteams/platform/toolkit/install-teams-toolkit?tabs=vscode)
+* [Teams Toolkit for Visual Studio](https://learn.microsoft.com/en-us/microsoftteams/platform/toolkit/toolkit-v4/teams-toolkit-fundamentals-vs?pivots=visual-studio-v17-7&WT.mc_id=M365-MVP-5004617)
 * [Whatever](#)
 
 _Please list any portions of the toolchain required to build and use the sample, along with download links_
@@ -64,10 +64,9 @@ Version|Date|Author|Comments
 
 This is a Teams personal Tab app to act as a Microsoft 365 across application (Teams, Outlook, Office)
 * Using SSO with Teams 
-* [Use SSO in a search-based messaging extension and extend to Outlook](?WT.mc_id=M365-MVP-5004617)
 * Using O-B-O flow secure and totally in backend to retrieve and store data via Microsoft SharePoint
 * Using Microsoft Graph to copy template to document and manipulate metadata
 * Using SharePoint PnP.Core to copy template to document and manipulate metadata
 * [Extend Teams apps across Microsoft 365](https://docs.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview?WT.mc_id=M365-MVP-5004617)
-* [Use FluentUI Blazor components Input, Dropdown, DropdownItem, DropdownItemProps, DropdownProps, FluentProgressRing, TextArea](https://fluentsite.z22.web.core.windows.net/)
+* [Use FluentUI Blazor components FluentTextField, FluentSelect, FluentNumberField, FluentProgressRing, FluentTextArea](https://fluentsite.z22.web.core.windows.net/)
 
