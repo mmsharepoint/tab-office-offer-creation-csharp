@@ -59,7 +59,13 @@ Version|Date|Author|Comments
 - Find/Add the app registration ClientId, ClientSecret to your appsettings.json (or a appsettings.Development.json)
 - Find/Fill OAuthAuthority with https://login.microsoftonline.com/_YOUR_TENANTID_
 - Grant admin consent to the given permissions in the app registration
-- Now you are good to go to continue in GettingStarted.txt with hitting F5 (You can also select an installed browser in the VS menu)
+- Now you are good to go to continue in GettingStarted.txt with hitting F5 (You can also select an installed browser in the VS menu
+- Create the content-type for your offers in a site / default document library of your choice (described [here](https://mmsharepoint.wordpress.com/2022/11/22/modern-sharepoint-content-type-publishing-manually-or-automated-pnp/))
+    - With PnP-PowerShell for instance call the deploy script with your site url as parameter
+        ```bash
+        .\templates\deploy.ps1 -siteUrl <YourFullSiteUrl>
+    
+    - Put the same site url to your appsettings.json under PnPCore:Sites:DemoSite:SiteUrl
 - Potentially decide if to use Microsoft Graph or SharePoint CSOM by setting "UseGraph" to "false" or "true" in appsettings.json
 
 

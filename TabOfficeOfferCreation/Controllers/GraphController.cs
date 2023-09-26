@@ -45,7 +45,7 @@ namespace TabOfficeOfferCreation.Controllers
         {
             Uri siteUri = new Uri(url);
             string host = siteUri.Host;
-            string relUrl = siteUri.MakeRelativeUri(siteUri).ToString();
+            string relUrl = siteUri.AbsolutePath;
             Site site = await _graphClient.Sites[$"{host}:/{relUrl}"].GetAsync((requestConfiguration) =>
             {
                 requestConfiguration.QueryParameters.Expand = new string[] { "drive" };
