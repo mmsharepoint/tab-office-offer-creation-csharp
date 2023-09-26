@@ -21,7 +21,7 @@
           <FluentTextField @bind-Value="@exampleModel.Title">Title</FluentTextField>
       </div>
       <div>
-          <label>Offer Date</label>
+          <label class="formLabel">Offer Date</label>
       </div>
       <div>          
           <InputDate @bind-Value=@exampleModel.OfferDate />
@@ -30,6 +30,7 @@
           <FluentNumberField @bind-Value="@exampleModel.Price" Step=".01">Price</FluentNumberField>
       </div>
       <div class="formLine">
+          <label class="formLabel">Offer Date</label>
           <label>VAT</label>
       </div>
       <div>          
@@ -80,7 +81,7 @@
         var result = await teamsUserCredential.GetTokenAsync(new TokenRequestContext(new string[] { }), new System.Threading.CancellationToken());
         string token = result.Token;
         var request = new HttpRequestMessage(HttpMethod.Post,
-            "/api/Graph");
+            "/api/Offer");
         request.Headers.Add("Accept", "application/json");
         request.Headers.Add("User-Agent", "HttpClientFactory-Sample");
         request.Content = new StringContent(JsonSerializer.Serialize(exampleModel), Encoding.UTF8, "application/json");

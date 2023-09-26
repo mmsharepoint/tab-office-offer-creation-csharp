@@ -48,3 +48,8 @@
 .formLine {
   margin-top: 12px;
 }
+
+.formLabel {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+}
