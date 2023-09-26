@@ -15,39 +15,38 @@ namespace TabOfficeOfferCreation.Controllers
         private readonly GraphServiceClient _graphClient;
         private readonly ITokenAcquisition _tokenAcquisition;
         private readonly ILogger<GraphController> _logger;
-        private string SiteUrl = "https://your-tenant.sharepoint.com/sites/Offerings"; // ToDo
-        public GraphController(ITokenAcquisition tokenAcquisition, GraphServiceClient graphClient, ILogger<GraphController> logger)
+        private string _siteUrl;
+        public GraphController(ITokenAcquisition tokenAcquisition, GraphServiceClient graphClient, ILogger<GraphController> logger, string siteUrl)
         {
             _tokenAcquisition = tokenAcquisition;
             _graphClient = graphClient;
             _logger = logger;
+            _siteUrl = siteUrl;
         }
-
-        [HttpPost]
-        public async Task<ActionResult<string>> Post(Offer offer)
-        {            
-            string userID = User.GetObjectId(); //   Claims["preferred_username"];
-            _logger.LogInformation($"Received from user {userID} with name {User.GetDisplayName()}");
-            _logger.LogInformation($"Received Offer {offer.Title} with descr {offer.Description}");
-
-            SiteDrive siteDrive = await getDriveIdByUrl(SiteUrl);
+        
+        public async Task<string> CreateOfferFromTemplate(Offer offer)
+        {                        
+            SiteDrive siteDrive = await getDriveIdByUrl(_siteUrl);
             DriveItemResult docTemplateInfo = await getFileInfoName(siteDrive.SiteId, "DocumentTemplate.docx");
             DriveItem newFile = await createNewDocument(siteDrive.DriveId, $"{offer.Title}.docx", siteDrive.RootId, docTemplateInfo.Id);
             DriveItemResult newFileInfo = await getFileInfoName(siteDrive.SiteId, $"{offer.Title}.docx");
             bool update = await updateLibraryItem(siteDrive.SiteId, siteDrive.DriveId, offer, newFileInfo.Id);
             if (update)
             {
-                return Ok(newFileInfo.WebUrl);
+                return newFileInfo.WebUrl;
             }
             else
             {
-                return BadRequest("Something went wrong");
+                return "";
             }
         }
 
         private async Task<SiteDrive> getDriveIdByUrl (string url)
         {
-            Site site = await _graphClient.Sites["mmoellermvp.sharepoint.com:/teams/Offerings"].GetAsync((requestConfiguration) =>
+            Uri siteUri = new Uri(url);
+            string host = siteUri.Host;
+            string relUrl = siteUri.MakeRelativeUri(siteUri).ToString();
+            Site site = await _graphClient.Sites[$"{host}:/{relUrl}"].GetAsync((requestConfiguration) =>
             {
                 requestConfiguration.QueryParameters.Expand = new string[] { "drive" };
             });

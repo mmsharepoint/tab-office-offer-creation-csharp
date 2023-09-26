@@ -19,15 +19,20 @@ namespace TabOfficeOfferCreation.Controllers
         private readonly IPnPContextFactory _pnpContextFactory;
         private readonly ILogger<GraphController> _logger;
         private readonly PnPCoreOptions _pnpCoreOptions;
-        private string SiteUrl = "https://your-tenant.sharepoint.com/sites/Offerings"; // ToDo
+        private readonly string _useGraph;
+        private readonly string _siteUrl;
         public OfferController(IPnPContextFactory pnpContextFactory, ITokenAcquisition tokenAcquisition, GraphServiceClient graphClient, ILogger<GraphController> logger,
-            IOptions<PnPCoreOptions> pnpCoreOptions)
+            IOptions<PnPCoreOptions> pnpCoreOptions, IConfiguration config)
         {
             _tokenAcquisition = tokenAcquisition;
             _graphClient = graphClient;
             _pnpContextFactory = pnpContextFactory;
             _logger = logger;
             _pnpCoreOptions = pnpCoreOptions?.Value;
+            string siteUrl = config["PnPCore:Sites:DemoSite:SiteUrl"];
+            _siteUrl = siteUrl;
+            string useGraph = config["UseGraph"];
+            _useGraph = useGraph;
         }
         [HttpPost]
         public async Task<ActionResult<string>> Post(Offer offer)
@@ -36,9 +41,18 @@ namespace TabOfficeOfferCreation.Controllers
             _logger.LogInformation($"Received from user {userID} with name {User.GetDisplayName()}");
             _logger.LogInformation($"Received Offer {offer.Title} with descr {offer.Description}");
 
-            SPOController spoCtrl = new SPOController(_tokenAcquisition, _pnpContextFactory, _logger, _pnpCoreOptions);
-            string result = await spoCtrl.CreateOfferFromTemplate(offer);
-            return result;
+            if (_useGraph == "false")
+            {
+                SPOController spoCtrl = new SPOController(_tokenAcquisition, _pnpContextFactory, _logger, _pnpCoreOptions);
+                string result = await spoCtrl.CreateOfferFromTemplate(offer);
+                return result;
+            }
+            else
+            {
+                GraphController grphCtrl = new GraphController(_tokenAcquisition, _graphClient, _logger, _siteUrl);
+                string result = await grphCtrl.CreateOfferFromTemplate(offer);
+                return result;
+            }
         }
 
         

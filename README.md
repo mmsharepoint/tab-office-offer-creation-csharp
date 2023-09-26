@@ -4,7 +4,7 @@ Teams and Office App to create custom offer documents for further processing. Fu
 
 ## Summary
 
-This sample is a Teams personal Tab to act as a Microsoft 365 across application (Teams, Outlook, Office) including a search-based messaging extension to act in Teams and Outlook. The App will create custom offer documents based on a custom SharePoint content type with custom document template for further processing such as review and finalization (PDF archive).
+This sample is a Teams personal Tab to act as a Microsoft 365 across application (Teams, Outlook, Office) to act in Teams and Outlook. The App will create custom offer documents based on a custom SharePoint content type with custom document template for further processing such as review and finalization (PDF archive).
 
 App live in action inside Teams
 
@@ -32,6 +32,8 @@ _Please list any portions of the toolchain required to build and use the sample,
 Version|Date|Author|Comments
 -------|----|----|--------
 1.0|Aug 28, 2023|[Markus Moeller](https://twitter.com/moeller2_0)|Initial release
+1.1|Sep 26, 2023|[Markus Moeller](https://twitter.com/moeller2_0)|SharePoint CSOM access as alternative added
+
 
 ## Disclaimer
 
@@ -51,13 +53,14 @@ Version|Date|Author|Comments
   - with redirect uri https://localhost/blank-auth-end.html
   - SignInAudience multi-tenant
   - with client secret
-  - with **delegated** permissions Files.ReadWrite and Sites.ReadWrite.All
+  - with **delegated** Graph permissions Sites.ReadWrite.All and SharePoint permission AllSites.Write
   - With exposed Api "access_as_user" and App ID Uri api://localhost/<App ID>
   - With the client IDs for Teams App and Teams Web App 1fec8e78-bce4-4aaf-ab1b-5451cc387264 and 5e3ce6c0-2b1f-4285-8d4b-75ee78787346
 - Find/Add the app registration ClientId, ClientSecret to your appsettings.json (or a appsettings.Development.json)
 - Find/Fill OAuthAuthority with https://login.microsoftonline.com/_YOUR_TENANTID_
 - Grant admin consent to the given permissions in the app registration
 - Now you are good to go to continue in GettingStarted.txt with hitting F5 (You can also select an installed browser in the VS menu)
+- Potentially decide if to use Microsoft Graph or SharePoint CSOM by setting "UseGraph" to "false" or "true" in appsettings.json
 
 
 ## Features
@@ -66,7 +69,7 @@ This is a Teams personal Tab app to act as a Microsoft 365 across application (T
 * Using SSO with Teams 
 * Using O-B-O flow secure and totally in backend to retrieve and store data via Microsoft SharePoint
 * Using Microsoft Graph to copy template to document and manipulate metadata
-* Using SharePoint PnP.Core to copy template to document and manipulate metadata
+* As alternative using [SharePoint PnP.Core](https://pnp.github.io/pnpcore/) to copy template to document and manipulate metadata
 * [Extend Teams apps across Microsoft 365](https://docs.microsoft.com/en-us/microsoftteams/platform/m365-apps/overview?WT.mc_id=M365-MVP-5004617)
 * [Use FluentUI Blazor components FluentTextField, FluentSelect, FluentNumberField, FluentProgressRing, FluentTextArea](https://fluentsite.z22.web.core.windows.net/)
 
