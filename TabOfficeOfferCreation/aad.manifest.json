@@ -17,15 +17,24 @@
         "saml2Token": []
     },
     "requiredResourceAccess": [
-        {
-            "resourceAppId": "Microsoft Graph",
-            "resourceAccess": [
-              {
-                "id": "Sites.ReadWrite.All",
-                "type": "Scope"
-              }
-            ]
-        }
+      {
+        "resourceAppId": "Microsoft Graph",
+        "resourceAccess": [
+          {
+            "id": "Sites.ReadWrite.All",
+            "type": "Scope"
+          }
+        ]
+      },
+      {
+        "resourceAppId": "SharePoint",
+        "resourceAccess": [
+          {
+            "id": "AllSites.Write",
+            "type": "Scope"
+          }
+        ]
+      }
     ],
     "oauth2Permissions": [
         {

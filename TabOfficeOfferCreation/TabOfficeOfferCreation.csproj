@@ -22,6 +22,8 @@
     <PackageReference Include="Microsoft.Identity.Web" Version="2.13.2" />
     <PackageReference Include="Microsoft.Identity.Web.GraphServiceClient" Version="2.13.2" />
     <PackageReference Include="Microsoft.TeamsFx" Version="2.1.*" />
+    <PackageReference Include="PnP.Core" Version="1.10.0" />
+    <PackageReference Include="PnP.Core.Auth" Version="1.10.0" />
   </ItemGroup>
 
 </Project>
